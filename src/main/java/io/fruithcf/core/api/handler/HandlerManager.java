@@ -1,5 +1,6 @@
 package io.fruithcf.core.api.handler;
 
+import com.google.common.collect.Maps;
 import io.fruithcf.core.Game;
 import org.bukkit.Bukkit;
 
@@ -15,8 +16,18 @@ import java.util.logging.Level;
 public class HandlerManager {
 
     private Map<String, Handler> handlers;
+    private static HandlerManager instance;
 
-    public void enableHandlers() {
+    public HandlerManager() {
+        handlers = Maps.newHashMap();
+        instance = this;
+    }
+
+    public static HandlerManager getInstance() {
+        return instance;
+    }
+
+    public void loadHandlers() {
         handlers.values().forEach(handler -> {
             handler.onLoad();
             if (handler.listener()) {
@@ -24,5 +35,16 @@ public class HandlerManager {
             }
             handler.getLogger().log(Level.INFO, " Loaded");
         });
+    }
+
+    public void unloadHandlers() {
+        handlers.values().forEach(handler -> {
+            handler.onUnload();
+            handler.getLogger().log(Level.INFO, " Unloaded");
+        });
+    }
+
+    public void registerHandler(Handler handler) {
+        handlers.put(handler.getClass().getSimpleName(), handler);
     }
 }

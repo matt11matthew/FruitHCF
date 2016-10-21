@@ -1,5 +1,6 @@
 package io.fruithcf.core;
 
+import io.fruithcf.core.api.handler.HandlerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -11,13 +12,30 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Game extends JavaPlugin {
 
     private static Game instance;
+    private HandlerManager handlerManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        handlerManager = new HandlerManager();
+        registerHandlers();
+        handlerManager.loadHandlers();
+    }
+
+    @Override
+    public void onDisable() {
+        handlerManager.unloadHandlers();
+    }
+
+    private void registerHandlers() {
+        handlerManager.registerHandler(null);
     }
 
     public static Game getInstance() {
         return instance;
+    }
+
+    public HandlerManager getHandlerManager() {
+        return handlerManager;
     }
 }
