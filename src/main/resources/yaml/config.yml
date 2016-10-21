@@ -1,30 +1,30 @@
 settings:
     update: true
-    database: MySQL
+    database: mysql
 
-mySql:
-  host:
-  port:
-  databaseName:
+mysql:
+  host: localhost
+  port: 3306
+  databaseName: fruithcf
   username:
   password:
 
-sqlLite:
-  path:
-  databaseName:
+sqllite:
+  path: %root%/plugins/FruitHCF/db/db.sqllite
+  databaseName: fruithcf
   username:
   password:
 
-mongoDb:
-  host:
-  port:
-  databaseName:
+mongodb:
+  host: localhost
+  port: 27001
+  databaseName: fruithcf
   username:
   password:
 
 redis:
-  host:
-  port:
-  databaseName:
+  host: localhost
+  port: 6006
+  databaseName: fruithcf
   username:
   password:
