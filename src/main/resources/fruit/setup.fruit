@@ -1,5 +1,0 @@
-settings {
-    type=JSON
-    #JSON/INI/YAML/FRUIT
-    #Default is YAML
-}

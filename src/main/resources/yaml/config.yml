@@ -1,2 +1,30 @@
 settings:
     update: true
+    database: MySQL
+
+mySql:
+  host:
+  port:
+  databaseName:
+  username:
+  password:
+
+sqlLite:
+  path:
+  databaseName:
+  username:
+  password:
+
+mongoDb:
+  host:
+  port:
+  databaseName:
+  username:
+  password:
+
+redis:
+  host:
+  port:
+  databaseName:
+  username:
+  password:
