@@ -1,0 +1,4 @@
+settings {
+  update = false
+  database
+}
