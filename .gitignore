@@ -1,1 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
+/.idea/libraries/
+/.idea/copyright/
+/.idea/compiler.xml
+/.idea/misc.xml
+/.idea/codeStyleSettings.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
+/FruitHCF.iml
