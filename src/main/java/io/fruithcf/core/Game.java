@@ -5,9 +5,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Created by Giovanni on 21-10-2016.
- * <p>
+ *
  * This file is part of the FruitHCF project.
  * Copyright (c) 2016 FruitHCF;www.vawke.io / development@vawke.io
+ */
+
+/**
+ * Copyright © 2016 Matthew E Development - All Rights Reserved
+ * You may NOT use, distribute and modify this code.
+ *
+ * Created by Matthew E on 10/21/2016 at 6:50 PM.
  */
 public class Game extends JavaPlugin {
 
