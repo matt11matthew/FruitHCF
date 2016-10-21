@@ -1,1 +1,0 @@
-permission("io.fruithcf.core");

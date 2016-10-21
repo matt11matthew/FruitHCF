@@ -8,10 +8,16 @@ import org.bukkit.plugin.java.JavaPlugin;
  * This file is part of the FruitHCF project.
  * Copyright (c) 2016 FruitHCF;www.vawke.io / development@vawke.io
  */
-public class Game extends JavaPlugin
-{
+public class Game extends JavaPlugin {
+
+    private static Game instance;
+
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
+        instance = this;
+    }
+
+    public static Game getInstance() {
+        return instance;
     }
 }
