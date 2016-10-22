@@ -10,6 +10,12 @@ import org.bukkit.ChatColor;
  */
 public class StringUtils {
 
+    /**
+     * @apiNote this method parses string parsed as colored string
+     * @author matt11matthew
+     * @since 1.0
+     * @version 1.0
+     */
     public static String colorCodes(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
     }

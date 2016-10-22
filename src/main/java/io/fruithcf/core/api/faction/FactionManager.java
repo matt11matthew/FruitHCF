@@ -4,7 +4,6 @@ import io.fruithcf.core.Game;
 import io.fruithcf.core.api.player.FruitPlayer;
 import io.fruithcf.core.lib.exceptions.FactionNotFoundException;
 import io.fruithcf.core.lib.file.FruitYAML;
-import io.fruithcf.core.lib.uuid.FruitUUID;
 
 import java.io.File;
 import java.util.UUID;
@@ -45,7 +44,7 @@ public class FactionManager {
         if (isFaction(name)) {
             return;
         }
-        UUID id = FruitUUID.generateNewUUID();
+        UUID id = UUID.randomUUID();
         Faction faction = new Faction();
         faction.setUniqueId(id);
         faction.setName(name);
