@@ -2,6 +2,7 @@ package io.fruithcf.core.game.enderpearl;
 
 import com.google.common.collect.Maps;
 import io.fruithcf.core.Game;
+import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -17,24 +18,30 @@ import java.util.UUID;
  * This file is part of the FruitHCF project.
  * Copyright (c) 2016 FruitHCF;www.vawke.io / development@vawke.io
  */
-public class EnderpearlHandler implements Handler.ListeningHandler
-{
+public class EnderpearlHandler implements Handler.ListeningHandler {
     private HashMap<UUID, Player> playerMap;
-
-    private int cooldown = 10; //TODO get from handler file
+    private FruitYAML fruitYAML;
+    private int cooldown;
 
     @Override
-    public void prepare()
-    {
-        //Game.getInstance().getServer().getPluginManager().registerEvents(this, Game.getInstance());
+    public void prepare() {
         this.playerMap = Maps.newHashMap();
+
+        fruitYAML = new FruitYAML(getClass().getSimpleName(), true);
+        if (fruitYAML.isNewFile()) {
+            fruitYAML.getFileConfiguration().set("cooldown", 10);
+            fruitYAML.save();
+        }
+        this.cooldown = fruitYAML.getFileConfiguration().getInt("cooldown");
+
     }
 
     @EventHandler
-    public void onThrow(ProjectileLaunchEvent event)
-    {
-        if ((event.getEntity().getShooter() instanceof Player) && (event.getEntity().getType() == EntityType.ENDER_PEARL))
-        {
+    public void onThrow(ProjectileLaunchEvent event) {
+        if ((event.getEntity().getShooter() instanceof Player) && (event.getEntity().getType() == EntityType.ENDER_PEARL)) {
+            if (cooldown == 0) {
+                return;
+            }
             if (this.playerMap.containsKey(event.getEntity().getShooter()))
                 event.setCancelled(true);
             else Game.getInstance().getServer().getScheduler().scheduleAsyncDelayedTask(Game.getInstance(), () -> {

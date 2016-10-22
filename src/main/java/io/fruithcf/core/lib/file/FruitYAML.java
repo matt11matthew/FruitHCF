@@ -22,17 +22,25 @@ public class FruitYAML
 
     private File file;
 
-    public FruitYAML(String name, boolean par1)
-    {
-        if (par1)
-        {
+    @Getter
+    private boolean newFile;
+
+    public FruitYAML(String name, boolean par1) {
+        this.newFile = false;
+        if (par1) {
             this.file = new File(Game.getInstance().getDataFolder() + File.separator + "handle", name);
-            this.fileConfiguration = YamlConfiguration.loadConfiguration(this.file);
-        } else
-        {
+        } else {
             this.file = new File(Game.getInstance().getDataFolder(), name);
-            this.fileConfiguration = YamlConfiguration.loadConfiguration(this.file);
         }
+        if (!exists()) {
+            try {
+                this.file.createNewFile();
+                this.newFile = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.fileConfiguration = YamlConfiguration.loadConfiguration(this.file);
     }
 
     public void setDefaults(Map<String, Object> map)
