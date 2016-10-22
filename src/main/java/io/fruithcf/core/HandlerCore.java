@@ -33,7 +33,7 @@ public class HandlerCore implements Handler {
         handlerMap.values().forEach(Handler::prepare);
     }
 
-    public void registerHandler(Handler handler) {
+    private void registerHandler(Handler handler) {
         handlerMap.put(handler.getClass().getSimpleName(), handler);
         if (handler instanceof ListeningHandler) {
             ListeningHandler listener = (ListeningHandler) handler;

@@ -1,5 +1,7 @@
 package io.fruithcf.core.api.player;
 
+import org.bukkit.Bukkit;
+
 import java.util.UUID;
 
 /**
@@ -12,4 +14,22 @@ import java.util.UUID;
 public class FruitPlayer {
 
     private UUID uniqueId;
+    private String name;
+
+    public UUID getUniqueId() {
+        return uniqueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isOnline() {
+        return Bukkit.getOfflinePlayer(uniqueId).isOnline();
+    }
+
+    public FruitPlayer(UUID uniqueId, String name) {
+        this.uniqueId = uniqueId;
+        this.name = name;
+    }
 }
