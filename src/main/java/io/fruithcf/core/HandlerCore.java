@@ -42,6 +42,14 @@ public class HandlerCore implements Handler {
         });
     }
 
+    @Override
+    public void onDisable() {
+        handlerMap.values().forEach(handler -> {
+            handler.onDisable();
+            handler.getLogger().log(Level.INFO, " has been unloaded");
+        });
+    }
+
     private void registerHandler(Handler handler) {
         handlerMap.put(handler.getClass().getSimpleName(), handler);
         if (handler instanceof ListeningHandler) {

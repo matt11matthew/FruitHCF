@@ -25,4 +25,9 @@ public class Game extends JavaPlugin
         this.handlerCore = new HandlerCore();
         this.handlerCore.prepare();
     }
+
+    @Override
+    public void onDisable() {
+        this.handlerCore.onDisable();
+    }
 }
