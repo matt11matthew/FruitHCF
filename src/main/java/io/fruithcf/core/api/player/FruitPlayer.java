@@ -56,7 +56,7 @@ public class FruitPlayer {
             this.faction = null;
             save();
         } else {
-
+            load();
         }
     }
 

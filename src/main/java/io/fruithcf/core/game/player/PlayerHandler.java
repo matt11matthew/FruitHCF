@@ -6,6 +6,7 @@ import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.util.UUID;
@@ -63,5 +64,19 @@ public class PlayerHandler implements Handler.ListeningHandler {
         FruitYAML yaml = new FruitYAML(file);
         FruitPlayer player = (yaml.isNewFile()) ? new FruitPlayer(e.getUniqueId(), e.getName(), true) : new FruitPlayer(e.getUniqueId(), e.getName(), false);
         playerCache.put(e.getUniqueId(), player);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        playerCache.get(e.getPlayer().getUniqueId()).save();
+        playerCache.remove(e.getPlayer().getUniqueId());
+    }
+
+    public FruitPlayer getPlayer(UUID uuid) {
+        return playerCache.get(uuid);
+    }
+
+    public FruitPlayer getPlayer(String name) {
+        return getPlayer(playerUUIDCache.get(name));
     }
 }

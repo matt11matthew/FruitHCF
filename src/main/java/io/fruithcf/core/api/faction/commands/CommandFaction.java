@@ -1,5 +1,6 @@
 package io.fruithcf.core.api.faction.commands;
 
+import io.fruithcf.core.api.GameAPI;
 import io.fruithcf.core.api.command.FruitCommand;
 import io.fruithcf.core.api.faction.Faction;
 import io.fruithcf.core.api.faction.FactionManager;
@@ -23,7 +24,8 @@ public class CommandFaction implements FruitCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
-            FruitPlayer fp = null;//TODO
+            Player player = (Player) sender;
+            FruitPlayer fp = GameAPI.getFruitPlayer(player);
             switch (args[0]) {
                 case "invite":
                     break;
@@ -72,7 +74,7 @@ public class CommandFaction implements FruitCommand {
                         break;
                     }
                     if (Bukkit.getPlayer(args[1]) != null) {
-                        FruitPlayer target = null;//TODO
+                        FruitPlayer target = GameAPI.getFruitPlayer(args[1]);
                         String name = (target.getFaction().getName() == null) ? "none" : target.getFaction().getName();
                         fp.sendCenterMessage(new String[]{
                                 "&b---------&l" + target.getName() + "&3---------",
