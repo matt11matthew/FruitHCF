@@ -50,4 +50,12 @@ public class Faction {
         fruitYAML.getFileConfiguration().set("members", member);
         fruitYAML.save();
     }
+
+    public String getParsedHome() {
+        if (factionHome == null) {
+            return "none";
+        }
+        String home = "x: " + (int) factionHome.getX() + ", y: " + (int) factionHome.getY() + ", z: " + (int) factionHome.getZ();
+        return home;
+    }
 }

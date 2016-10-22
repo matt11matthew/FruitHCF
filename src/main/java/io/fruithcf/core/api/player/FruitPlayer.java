@@ -1,5 +1,9 @@
 package io.fruithcf.core.api.player;
 
+import io.fruithcf.core.Game;
+import io.fruithcf.core.api.faction.Faction;
+import io.fruithcf.core.lib.prompt.Prompt;
+import io.fruithcf.core.lib.utils.string.StringUtils;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
@@ -16,6 +20,9 @@ public class FruitPlayer {
     private UUID uniqueId;
     private String name;
     private int lives;
+    private Faction faction;
+    private int kills;
+    private int deaths;
 
     public UUID getUniqueId() {
         return uniqueId;
@@ -40,5 +47,37 @@ public class FruitPlayer {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    public void msg(String msg) {
+        Game.getInstance().getServer().getPlayer(uniqueId).sendMessage(StringUtils.colorCodes(msg));
+    }
+
+    public void sendCenterMessage(String[] msg) {
+        Prompt.sendCenteredMessage(Bukkit.getPlayer(uniqueId), msg);
+    }
+
+    public Faction getFaction() {
+        return faction;
+    }
+
+    public void setFaction(Faction faction) {
+        this.faction = faction;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
     }
 }
