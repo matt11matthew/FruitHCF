@@ -10,16 +10,7 @@ import org.bukkit.ChatColor;
  */
 public class StringUtils {
 
-    private static StringUtils instance;
-
-    public static StringUtils get() {
-        if (instance == null) {
-            instance = new StringUtils();
-        }
-        return instance;
-    }
-
-    public String colorCodes(String string) {
+    public static String colorCodes(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 }
