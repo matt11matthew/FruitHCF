@@ -28,7 +28,7 @@ public class Faction {
     private double dtr;
 
     public Faction() {
-        
+
     }
 
     public void save() {

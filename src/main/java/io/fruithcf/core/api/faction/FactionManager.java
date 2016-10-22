@@ -2,6 +2,7 @@ package io.fruithcf.core.api.faction;
 
 import io.fruithcf.core.Game;
 import io.fruithcf.core.api.player.FruitPlayer;
+import io.fruithcf.core.lib.exceptions.FactionNotFoundException;
 import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.uuid.FruitUUID;
 
@@ -18,25 +19,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FactionManager {
 
     private ConcurrentHashMap<UUID, Faction> factionMap;
+    private static FactionManager instance;
 
     public FactionManager() {
         this.factionMap = new ConcurrentHashMap<>();
     }
 
-    private boolean isFaction(String name) {
+    public boolean isFaction(String name) {
         for (Faction faction : factionMap.values()) {
             return (faction.getName().equals(name));
         }
         return false;
     }
 
-    public Faction getFaction(String name) {
+    public Faction getFaction(String name) throws FactionNotFoundException {
         for (Faction faction : factionMap.values()) {
             if (faction.getName().equals(name)) {
                 return faction;
             }
         }
-        return null;
+        throw new FactionNotFoundException();
     }
 
     public void createFaction(String name, FruitPlayer leader) {
@@ -61,5 +63,12 @@ public class FactionManager {
         fruitYAML.getFileConfiguration().set("leader", leader.getUniqueId().toString());
         fruitYAML.getFileConfiguration().set("members", null);
         fruitYAML.save();
+    }
+
+    public static FactionManager getInstance() {
+        if (instance == null) {
+            instance = new FactionManager();
+        }
+        return instance;
     }
 }
