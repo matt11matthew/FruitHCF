@@ -1,5 +1,5 @@
 name: FruitHCF
-version: 1.0-DEV
+version: ${version}
 authors: [matt11matthew, Vawke]
 main: io.fruithcf.core.Game
 description: Whats to see?
