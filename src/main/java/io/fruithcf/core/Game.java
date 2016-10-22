@@ -1,6 +1,7 @@
 package io.fruithcf.core;
 
 import io.fruithcf.core.api.handler.HandlerManager;
+import io.fruithcf.core.api.handler.handlers.deathban.DeathBanHandler;
 import io.fruithcf.core.api.handler.handlers.player.PlayerHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,6 +38,7 @@ public class Game extends JavaPlugin {
 
     private void registerHandlers() {
         handlerManager.registerHandler(new PlayerHandler());
+        handlerManager.registerHandler(new DeathBanHandler());
     }
 
     public static Game getInstance() {
