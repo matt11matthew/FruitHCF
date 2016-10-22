@@ -15,6 +15,7 @@ public class FruitPlayer {
 
     private UUID uniqueId;
     private String name;
+    private int lives;
 
     public UUID getUniqueId() {
         return uniqueId;
@@ -31,5 +32,13 @@ public class FruitPlayer {
     public FruitPlayer(UUID uniqueId, String name) {
         this.uniqueId = uniqueId;
         this.name = name;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }

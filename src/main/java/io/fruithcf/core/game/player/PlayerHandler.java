@@ -1,13 +1,12 @@
 package io.fruithcf.core.game.player;
 
-import com.google.common.collect.Maps;
 import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 /**
@@ -20,12 +19,12 @@ public class PlayerHandler implements Handler.ListeningHandler {
 
     private Logger logger;
     private FruitYAML fruitYAML;
-    private HashMap<String, UUID> playerUUIDCache;
+    private ConcurrentHashMap<String, UUID> playerUUIDCache;
 
     @Override
     public void prepare() {
         this.logger = Logger.getLogger(getClass().getSimpleName());
-        this.playerUUIDCache = Maps.newHashMap();
+        this.playerUUIDCache = new ConcurrentHashMap<>();
 
         fruitYAML = new FruitYAML(getClass().getSimpleName(), true);
         if (fruitYAML.isNewFile()) {
@@ -38,8 +37,7 @@ public class PlayerHandler implements Handler.ListeningHandler {
         });
     }
 
-    @Override
-    public void onDisable() {
+    public void save() {
         playerUUIDCache.keySet().forEach(name -> {
             fruitYAML.getFileConfiguration().set("playerCache." + name + ".uuid", playerUUIDCache.get(name).toString());
             fruitYAML.save();

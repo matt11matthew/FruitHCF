@@ -19,10 +19,6 @@ public interface Handler
         return Logger.getLogger("Handler");
     }
 
-    default void onDisable() {
-
-    }
-
     interface ListeningHandler extends Handler, Listener
     {
         default void cancel(Event event)
