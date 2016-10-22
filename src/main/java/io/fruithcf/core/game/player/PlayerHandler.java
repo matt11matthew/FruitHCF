@@ -1,10 +1,13 @@
 package io.fruithcf.core.game.player;
 
+import io.fruithcf.core.Game;
+import io.fruithcf.core.api.player.FruitPlayer;
 import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
+import java.io.File;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
@@ -20,11 +23,13 @@ public class PlayerHandler implements Handler.ListeningHandler {
     private Logger logger;
     private FruitYAML fruitYAML;
     private ConcurrentHashMap<String, UUID> playerUUIDCache;
+    private ConcurrentHashMap<UUID, FruitPlayer> playerCache;
 
     @Override
     public void prepare() {
         this.logger = Logger.getLogger(getClass().getSimpleName());
         this.playerUUIDCache = new ConcurrentHashMap<>();
+        this.playerCache = new ConcurrentHashMap<>();
 
         fruitYAML = new FruitYAML(getClass().getSimpleName(), true);
         if (fruitYAML.isNewFile()) {
@@ -54,5 +59,9 @@ public class PlayerHandler implements Handler.ListeningHandler {
         if (!playerUUIDCache.containsKey(e.getName())) {
             playerUUIDCache.put(e.getName(), e.getUniqueId());
         }
+        File file = new File(Game.getInstance().getDataFolder() + "/playerdata/", e.getUniqueId().toString() + ".yml");
+        FruitYAML yaml = new FruitYAML(file);
+        FruitPlayer player = (yaml.isNewFile()) ? new FruitPlayer(e.getUniqueId(), e.getName(), true) : new FruitPlayer(e.getUniqueId(), e.getName(), false);
+        playerCache.put(e.getUniqueId(), player);
     }
 }
