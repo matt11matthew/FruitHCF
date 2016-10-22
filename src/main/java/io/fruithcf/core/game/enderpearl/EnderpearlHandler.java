@@ -11,6 +11,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * Created by Giovanni on 22-10-2016.
@@ -22,9 +23,12 @@ public class EnderpearlHandler implements Handler.ListeningHandler {
     private HashMap<UUID, Player> playerMap;
     private FruitYAML fruitYAML;
     private int cooldown;
+    private Logger logger;
 
     @Override
     public void prepare() {
+        this.logger = Logger.getLogger(getClass().getSimpleName());
+
         this.playerMap = Maps.newHashMap();
 
         fruitYAML = new FruitYAML(getClass().getSimpleName(), true);
@@ -34,6 +38,11 @@ public class EnderpearlHandler implements Handler.ListeningHandler {
         }
         this.cooldown = fruitYAML.getFileConfiguration().getInt("cooldown");
 
+    }
+
+    @Override
+    public Logger getLogger() {
+        return logger;
     }
 
     @EventHandler

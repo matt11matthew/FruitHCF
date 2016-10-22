@@ -5,6 +5,7 @@ import io.fruithcf.core.game.enderpearl.EnderpearlHandler;
 import io.fruithcf.core.lib.handler.Handler;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 
 /**
  * Copyright © 2016 Matthew E Development - All Rights Reserved
@@ -30,7 +31,15 @@ public class HandlerCore implements Handler {
         registerHandler(new EnderpearlHandler());
         registerHandler(new DeathHandler());
 
-        handlerMap.values().forEach(Handler::prepare);
+        handlerMap.values().forEach(handler -> {
+            try {
+                handler.prepare();
+                handler.getLogger().log(Level.INFO, " has been loaded");
+            } catch (Exception e) {
+                handler.getLogger().log(Level.WARNING, " could not load " + handler.getClass().getName());
+                e.printStackTrace();
+            }
+        });
     }
 
     private void registerHandler(Handler handler) {
