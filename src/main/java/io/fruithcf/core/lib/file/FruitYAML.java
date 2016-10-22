@@ -25,12 +25,25 @@ public class FruitYAML
     @Getter
     private boolean newFile;
 
+    public FruitYAML(File file)  {
+        this.newFile = false;
+        if (!file.exists()) {
+            this.newFile = true;
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.file = file;
+        }
+        this.fileConfiguration = YamlConfiguration.loadConfiguration(this.file);
+    }
     public FruitYAML(String name, boolean par1) {
         this.newFile = false;
         if (par1) {
-            this.file = new File(Game.getInstance().getDataFolder() + File.separator + "handle", name);
+            this.file = new File(Game.getInstance().getDataFolder() + File.separator + "handle", name + ".yml");
         } else {
-            this.file = new File(Game.getInstance().getDataFolder(), name);
+            this.file = new File(Game.getInstance().getDataFolder(), name + ".yml");
         }
         if (!exists()) {
             try {

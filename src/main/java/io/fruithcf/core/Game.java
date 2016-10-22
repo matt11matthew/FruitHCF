@@ -25,5 +25,5 @@ public class Game extends JavaPlugin
         this.handlerCore = new HandlerCore();
         this.handlerCore.prepare();
     }
-    
+
 }
