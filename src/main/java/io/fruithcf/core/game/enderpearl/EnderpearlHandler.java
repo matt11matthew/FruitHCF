@@ -33,13 +33,13 @@ public class EnderpearlHandler implements Handler.ListeningHandler
     @EventHandler
     public void onThrow(ProjectileLaunchEvent event)
     {
-        if (event.getEntity().getShooter() instanceof Player && event.getEntity().getType() == EntityType.ENDER_PEARL)
+        if ((event.getEntity().getShooter() instanceof Player) && (event.getEntity().getType() == EntityType.ENDER_PEARL))
         {
             if (this.playerMap.containsKey(event.getEntity().getShooter()))
                 event.setCancelled(true);
             else Game.getInstance().getServer().getScheduler().scheduleAsyncDelayedTask(Game.getInstance(), () -> {
                 this.playerMap.remove(event.getEntity().getShooter());
-            }, 20 * this.cooldown);
+            }, (20L * this.cooldown));
         }
     }
 }
