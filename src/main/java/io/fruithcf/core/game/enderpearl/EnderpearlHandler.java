@@ -2,7 +2,6 @@ package io.fruithcf.core.game.enderpearl;
 
 import com.google.common.collect.Maps;
 import io.fruithcf.core.Game;
-import io.fruithcf.core.lib.file.FruitYAML;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -27,7 +26,7 @@ public class EnderpearlHandler implements Handler.ListeningHandler
     @Override
     public void prepare()
     {
-        Game.getInstance().getServer().getPluginManager().registerEvents(this, Game.getInstance());
+        //Game.getInstance().getServer().getPluginManager().registerEvents(this, Game.getInstance());
         this.playerMap = Maps.newHashMap();
     }
 

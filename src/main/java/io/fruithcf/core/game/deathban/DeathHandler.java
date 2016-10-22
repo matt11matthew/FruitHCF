@@ -1,6 +1,5 @@
 package io.fruithcf.core.game.deathban;
 
-import io.fruithcf.core.Game;
 import io.fruithcf.core.lib.handler.Handler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -16,7 +15,7 @@ public class DeathHandler implements Handler.ListeningHandler
     @Override
     public void prepare()
     {
-        Game.getInstance().getServer().getPluginManager().registerEvents(this, Game.getInstance());
+        //Game.getInstance().getServer().getPluginManager().registerEvents(this, Game.getInstance());
     }
 
     @EventHandler
